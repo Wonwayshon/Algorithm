@@ -1,2 +1,9 @@
-.idea
-
+# Default ignored files
+/shelf/
+/idea/
+/out/
+# Datasource local storage ignored files
+/../../../../:\Java\Algorithm\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
