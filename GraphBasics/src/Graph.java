@@ -1,15 +1,14 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.TreeSet;
-
-public class AdjSet {
+//无向无权图
+public class Graph {
     private int V;
     private int E;
     private TreeSet<Integer>[] adj;
 
-    public AdjSet(String filename) {
+    public Graph(String filename) {
         File file = new File(filename);
         try (Scanner scanner = new Scanner(file)) {
             V = scanner.nextInt();
@@ -92,7 +91,7 @@ public class AdjSet {
     }
 
     public static void main(String[] args) {
-        AdjSet adjSet = new AdjSet("GraphBasics/g.txt");
+        Graph adjSet = new Graph("GraphBasics/g.txt");
         System.out.println(adjSet);
     }
 }
