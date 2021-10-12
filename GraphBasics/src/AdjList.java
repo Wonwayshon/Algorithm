@@ -1,10 +1,9 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public class AdjList {
+public class AdjList implements Graph {
     private int V;
     private int E;
     private LinkedList<Integer>[] adj;

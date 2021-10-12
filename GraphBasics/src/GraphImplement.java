@@ -3,12 +3,12 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.TreeSet;
 //无向无权图
-public class Graph {
+public class GraphImplement implements Graph {
     private int V;
     private int E;
     private TreeSet<Integer>[] adj;
 
-    public Graph(String filename) {
+    public GraphImplement(String filename) {
         File file = new File(filename);
         try (Scanner scanner = new Scanner(file)) {
             V = scanner.nextInt();
@@ -46,7 +46,7 @@ public class Graph {
         }
     }
 
-    private void validateVertex(int v){
+    public void validateVertex(int v){
         if(v<0 || v>=V){
             throw new IllegalArgumentException("Illegal Argument v = "+v);
         }
@@ -91,7 +91,7 @@ public class Graph {
     }
 
     public static void main(String[] args) {
-        Graph adjSet = new Graph("GraphBasics/g.txt");
+        GraphImplement adjSet = new GraphImplement("GraphBasics/g.txt");
         System.out.println(adjSet);
     }
 }

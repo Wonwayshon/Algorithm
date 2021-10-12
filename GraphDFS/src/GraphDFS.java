@@ -38,7 +38,7 @@ public class GraphDFS {
     }
 
     public static void main(String[] args) {
-        Graph g = new Graph("GraphDFS/g.txt");
+        Graph g = new GraphImplement("GraphDFS/g.txt");
         GraphDFS graphDFS = new GraphDFS(g);
         System.out.println(graphDFS.pre());
         System.out.println(graphDFS.post());
