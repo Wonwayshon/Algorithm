@@ -1,16 +1,14 @@
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class SingleSoursePath {
+public class SingleSoursePathOptimized {
     private Graph graph;
-    private boolean[] visited;
     private int[] pre;
     private int s;
 
-    public SingleSoursePath(Graph graph,int s){
+    public SingleSoursePathOptimized(Graph graph, int s){
         this.graph = graph;
         this.s = s;
-        visited = new boolean[graph.V()];
         pre = new int[graph.V()];
         for (int i = 0; i < pre.length; i++) {
             pre[i] = -1;
@@ -19,11 +17,10 @@ public class SingleSoursePath {
     }
 
     private void dfs(int v,int parent){
-        visited[v] = true;
         pre[v] = parent;
 
         for(int w:graph.adj(v)){
-            if(!visited[w]){
+            if(pre[w]==-1){
                 dfs(w, v);
             }
         }
@@ -47,12 +44,12 @@ public class SingleSoursePath {
 
     public boolean isConnected(int v){
         ((GraphImplement)graph).validateVertex(v);
-        return visited[v];
+        return pre[v]!=-1;
     }
 
     public static void main(String[] args) {
         Graph g = new GraphImplement("GraphDFS/g.txt");
-        SingleSoursePath ssPath = new SingleSoursePath(g,0);
+        SingleSoursePathOptimized ssPath = new SingleSoursePathOptimized(g,0);
         System.out.println("0 -> 6: "+ssPath.path(6));
     }
 }

@@ -1,41 +1,55 @@
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class SingleSourcePath {
+public class Path {
     private Graph graph;
     private boolean[] visited;
     private int[] pre;
     private int s;
+    private int t;
 
-    public SingleSourcePath(Graph graph, int s){
+    public Path(Graph graph, int s, int t) {
         this.graph = graph;
+        ((GraphImplement)graph).validateVertex(t);
+        ((GraphImplement)graph).validateVertex(s);
         this.s = s;
+        this.t = t;
         visited = new boolean[graph.V()];
         pre = new int[graph.V()];
         for (int i = 0; i < pre.length; i++) {
             pre[i] = -1;
         }
         dfs(s, s);
+
+//        for(int i=0;i< visited.length;i++){
+//            System.out.print(visited[i]+" ");
+//        }
     }
 
-    private void dfs(int v,int parent){
+    private boolean dfs(int v,int parent){
         visited[v] = true;
         pre[v] = parent;
 
+        if (v == t) {
+            return true;
+        }
+
         for(int w:graph.adj(v)){
             if(!visited[w]){
-                dfs(w, v);
+                if(dfs(w, v)) return true;
             }
         }
 
+        return false;
     }
 
-    public Iterable<Integer> path(int v){
+    public Iterable<Integer> path(){
         ArrayList<Integer> res = new ArrayList<>();
-        int cur = v;
-        if(!isConnected(v)){
+        if(!isConnected()){
             return res;
         }
+
+        int cur = t;
         while (cur != s) {
             res.add(cur);
             cur = pre[cur];
@@ -45,14 +59,13 @@ public class SingleSourcePath {
         return res;
     }
 
-    public boolean isConnected(int v){
-        ((GraphImplement)graph).validateVertex(v);
-        return visited[v];
+    public boolean isConnected(){
+        return visited[t];
     }
 
     public static void main(String[] args) {
         Graph g = new GraphImplement("GraphDFS/g.txt");
-        SingleSourcePath ssPath = new SingleSourcePath(g,0);
-        System.out.println("0 -> 6: "+ssPath.path(6));
+        Path path = new Path(g,0,6);
+        System.out.println("0 -> 6: "+path.path());
     }
 }
